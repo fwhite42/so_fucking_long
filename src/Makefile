@@ -1,40 +1,62 @@
-.DEFAULT_GOAL = all
+###############################################################################
+# Metadata
+###############################################################################
 
-# Generates the name from the folder name.
-# Example: in a folder named "libft", $(NAME) expands to "ft"
+## Generates library name (name from the folder name).
 NAME		:= $(patsubst lib%,%,$(notdir $(CURDIR)))
 
-# The archive name is generated from the $(NAME)
+## Generates archive name (from the value of $(NAME))
 ARCHIVE		:= lib$(NAME).a
 
-# Source files and corresponding object are defined from a METHODS list, which
-# is defined by some Makefile importing this Makefile
+## List of getters
 GMETHODS	= $(foreach fn, $(GETTERS), $(word 1, $(subst :, ,$(fn))))
+
+## List of setters
 SMETHODS	= $(foreach fn, $(SETTERS), $(word 1, $(subst :, ,$(fn))))
 
+## Lis of all methods (MIND THAT THESE HAVE TO BE DEFINED OUTSIDE)
 METHODS		+= $(GMETHODS) $(SMETHODS)
 
 SOURCE		:= $(METHODS:%=$(NAME)_%.c)
 OBJECTS		:= $(SOURCE:%.c=%.o)
 
-.PHONY: check_source
-check_source:
+.PHONY: check
+check:
+	@echo Module Name: $(NAME)
+	@echo Getters:
+	@echo $(GMETHODS:%=%)
+	@echo Setters
+	@echo $(SMETHODS:%=%)
+	@echo Core Methods
+	@echo $(filter-out $(GMETHOS) $(SMETHODS), $(METHODS:%=%));
 	@echo Source Files:
 	@echo $(SOURCE)
+	@echo Object Files:
+	@echo $(OBJECTS)
 
-# Implicit rules for compiling C programs
+###############################################################################
+# Implicit Rules
+###############################################################################
+
+## Implicit rules for compiling C programs
 CC		:= gcc
 CFLAGS		:= -Wall -Werror -Wextra
 CPPFLAGS	:= -I$(includedir) -I$(CURDIR)	
 
-# Look inside $(includedir) for header files (if $(includedir) is defined)
+## Look inside $(includedir) for header files (if $(includedir) is defined)
 ifdef (includedir)
 CPPFLAGS	+= -I$(includedir)
 endif
 
-# Implicit rules for archiving objects
+## Implicit rules for archiving objects
 AR		:= ar
 ARFLAGS		:= -rcs
+
+###############################################################################
+# Targets
+###############################################################################
+
+.DEFAULT_GOAL = all
 
 .PHONY: all
 all: $(ARCHIVE)
@@ -84,3 +106,7 @@ setters:
 
 $(GMETHODS:%=$(NAME)_%.c):%: getters
 $(SMETHODS:%=$(NAME)_%.c):%: setters
+
+.PHONY: touch_all
+touch_all:
+	touch $(METHODS:%=$(NAME)_%.c)	

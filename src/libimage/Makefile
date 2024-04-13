@@ -1,25 +1,20 @@
 define GETTERS
 	width:int
 	height:int
-	buff:char*
-	view:void*
+	data:void*
 endef
 
 define SETTERS
-	bind_view:void*
-	bind_buff:void*
+	set_width
+	set_height
+	bind_data
 endef
 
 define METHODS
 	create_null
 	create
-	populate
 	load
-	read_at
-	vread_at
-	write_at
-	print
-	printf
+	destroy
 endef
 
 include ../Makefile

@@ -1,54 +1,35 @@
-// The ctx is the mlx context (generally returned by "mlx_init()")
-// The window is a reference to the window pointer, which is our target
-// The view is a camera on any (dynamically assigned) map object.
-// The conf is a mapping from uint8 to image/animation pointers
-
+#ifndef LIBRENDER_H
+# define LIBRENDER_H
+//Struct
 typedef struct s_render {
+	int	state;
+	int	osx;
+	int	osy;
+	int	blocksize;
 	void	*ctx;
 	void	*win;
-	void	*view;
-	void	*conf[256];
+	void	*map;
+	void	*database;
 }	t_render;
-	
-void	render_config(void *self, uint8_t key, void *data);
-{
-	((t_render *)self)->conf[key] = data;
-}
-
-// An image loader is present. It is a "pure method" (cf. Solidity)
-void	*render_load_image(void *self, char *image_path)
-{
-	t_render	*render;
-
-	return (mlx_xpm_file_to_image(render->ctx, image_path, NULL, NULL));
-}
-
-void	render_draw_at(void *self, void *map, int x, int y)
-{
-	t_render	*render;
-	void		*image;
-	
-	render = self;
-	image = render_resolve_position(self, map, x, y);
-	mlx_put_image_on_window(render->ctx, render->win, image, x, y);
-}
-
-void	*render_create(void *ctx, void *win)
-{
-	t_render	*ptr;
-	
-	ptr = (t_render *)ft_calloc(sizeof(t_render));
-	ptr->ctx = ctx;
-	ptr->win = win;
-	return (ptr);
-}
-
-void	*render_new(int win_width, int win_height)
-{
-	void	*ctx;
-	void	*win;
-	
-	ctx = mlx_init();
-	win = mlx_new_window(ctx, win_width, win_height, " ")
-	render_create(ctx, win);
-}
+//Getters
+int	render_state(void *self);
+int	render_state(void *osx);
+int	render_state(void *osy);
+int	render_blocksize(void *self);
+//Setters
+void	render_set_state;
+void	render_set_osx;
+void	render_set_osy;
+void	render_set_blocksize;
+//Constructor
+void	*render_create_null(void);
+void	render_create(void *ctx, void *win, void *map);
+void	render_destroy(void *self);
+//Config
+void	render_init_database(void *self);
+void	render_destroy_database(void *self);
+void	render_load_image(void *self, char *path, int id, int index);
+//Main Stuff
+void	*render_resolve_point(void *self, char point);
+void	render_put_image(void *self, int id, int x, int y);
+#endif

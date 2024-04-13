@@ -6,7 +6,7 @@
 /*   By: fwhite42 <FUCK THE NORM>                          (  o  )            */
 /*                                                       _/'-----'\_          */
 /*   Created: 2024/02/21 12:35:55 by fwhite42          \\ \\     // //        */
-/*   Updated: 2024/04/09 23:52:06 by fwhite42         ###   ########.fr       */
+/*   Updated: 2024/04/10 08:36:07 by fwhite42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 
 char map_read_at(void *self, int x, int y)
 {
-	t_map *map;
+	int	index;
 
-	map = self;
-	return (((char *)map->buff)[x + y * (map->width + 1)]);
+	index = x + y * (map_width(self) + 1);
+	if (index < 0 || x < 0 || y < 0)
+		return (' ');
+	return (map_buff(self)[index]);
 }

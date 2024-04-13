@@ -1,9 +1,6 @@
 #include"librender.h"
 
-void	*render_resolve_point(void *self, char point)
+void	*render_resolve(void *self, char point)
 {
-	t_render	*render;
-	
-	render = self;
-	return (((t_render *)self)->conf[point]);
+	return (render_database(self)[point][render_state(self)]);
 }

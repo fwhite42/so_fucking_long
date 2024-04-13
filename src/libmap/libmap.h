@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                                            */
-/*   libmap.h                                           :+:      :+:    :+:   */
-/*                                                        (@)-=-(@)           */
-/*   By: fwhite42 <FUCK THE NORM>                          (  o  )            */
-/*                                                       _/'-----'\_          */
-/*   Created: 2024/02/21 04:33:38 by fwhite42          \\ \\     // //        */
-/*   Updated: 2024/04/09 23:52:16 by fwhite42         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 #ifndef MAP_H
 # define MAP_H
 # include<stdint.h>
@@ -40,6 +29,7 @@ void		*map_create(void *buff);
 void		*map_create_null(void);
 // Prints the object
 void		map_print(void *self);
+void		map_printf(void *self, char *flags);
 // Reads the file at filepath, binds the buffer, calls map_populate.
 void		map_load(void *self, char *file_path);
 // Stores the object inside a file
