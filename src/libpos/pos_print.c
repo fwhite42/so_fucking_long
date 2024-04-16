@@ -3,6 +3,5 @@
 
 void	pos_print(void	*self)
 {
-	ft_printf("(%p)\t(%p) <- Position", self, pos_map(self));
-	ft_printf("(%i; %i) = %c\n", pos_x(self), pos_y(self), pos_read(self));
+	ft_printf("Position<%i, %i>\n", pos_x(self), pos_y(self));
 }

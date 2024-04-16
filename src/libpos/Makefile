@@ -1,27 +1,41 @@
 define GETTERS
 	x:int
 	y:int
-	map:void*
 endef
 
 define SETTERS
 	set_x:int
 	set_y:int
-	bind_map:void*
+endef
+
+define CONSTRUCTORS
+	create_null
+	create
+	from_index
+endef
+
+define DECONSTRUCTORS
+	destroy
+endef
+
+define PRINTERS
+	print
+endef
+
+define MOVEMENTS
+	move_up
+	move_down
+	move_left
+	move_right
 endef
 
 define METHODS
-	create_null
-	write
+	$(CONSTRUCTORS)
+	$(DECONSTRUCTORS)
+	$(MOVEMENTS)
+	$(PRINTERS)
 	read
-	from_index
-	print
-	read
 	write
-	move
-	safe_move
-	swap
-	on_command
 endef
 	
 include ../Makefile

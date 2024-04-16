@@ -13,11 +13,13 @@ define RARIES
 	ft
 	ftprintf
 	error
+	test
 	arr
 	rwf
 	view
 	map
 	pos
+	game
 endef
 
 define REQ_TEST

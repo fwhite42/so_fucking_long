@@ -1,31 +1,39 @@
 #ifndef LIBPOS_H
-// Positions are like pointers on maps
+# define LIBPOS_H
+
+//Struct
 typedef struct s_pos
 {
-	void	*map;
 	int	x;
 	int	y;
 }	t_pos;
-// Constructor
+
+//Constructors
 void	*pos_create_null(void);
+void	*pos_create(int x, int y);
 void	*pos_from_index(void *map, int index);
-// Getters
+
+//Getters
 int	pos_x(void *self);
 int	pos_y(void *self);
-void	*pos_map(void *self);
-// Setters
-void	pos_bind_map(void *self, void *map);
+
+//Setters
 void	pos_set_x(void *self, int x);
 void	pos_set_y(void *self, int y);
-// Methods
-char	pos_read(void *self);
-void	pos_write(void *self, char value);
-void	pos_move(void *self, int dx, int dy);
-void	pos_safe_move(void *self, int dx, int dy);
-void	pos_swap(void *self, void *with_another_position);
+
+//Movements
+void	pos_move_up(void *self);
+void	pos_move_down(void *self);
+void	pos_move_left(void *self);
+void	pos_move_right(void *self);
+
+//Printers
 void	pos_print(void *self);
-// Events
-int	pos_on_command(int command, void *self);
-// Deconstructor
+
+//Read/Write pointed value
+char	pos_read(void *self, void *map);
+void	pos_write(void *self, void *map, char value);
+
+//Deconstructor
 void	pos_destroy(void *self);
 #endif

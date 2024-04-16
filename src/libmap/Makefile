@@ -13,6 +13,7 @@ endef
 define METHODS
 	create_null
 	create
+	destroy
 	populate
 	load
 	read_at

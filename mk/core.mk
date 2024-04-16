@@ -158,6 +158,8 @@ fclean: clean
 # Assets
 ###############################################################################
 
+assetsdir	?= assets
+
 .PHONY: maps
 maps:
 	$(MAKE) -C assets/map

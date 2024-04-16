@@ -1,11 +1,21 @@
-typedef struct s_game_state
-{
-	void	*ctx;
-	uint16_t	player_x_pos;
-	uint16_t	player_y_pos;
-}	t_game_state
+#ifndef LIBGAME_H
+# define LIBGAME_H
 
-void	*game_state_create(void);
-void	*game_state_load(void *self, char *file);
-void	*game_state_save(void *self, char *file);
-void	*game_state_move_player(void *self)
+typedef struct s_game
+{
+	void	*map;
+	void	*mobs;
+}	t_game;
+
+void	*game_create_null(void);
+void	game_destroy(void *self);
+
+void	*game_map(void *self);
+void	**game_mobs(void *self);
+
+void	game_bind_map(void *self, void *map);
+void	game_bind_mobs(void *self, void **mobs);
+
+void	game_parse_mobs(void *self);
+void	*game_get_mob_pos(void *self, int mob_type, int mob_id);
+#endif

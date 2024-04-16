@@ -1,4 +1,5 @@
 #include"libarr.h"
+#include"stddef.h"
 
 void	*arr_pop(void *self)
 {

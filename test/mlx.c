@@ -26,7 +26,6 @@ int	main(void)
 	void	*win;
 	void	*map;
 
-
 	map = map_create_null();
 	map_load(map, "./assets/map/simple.ber");
 	map_print(map);
@@ -37,8 +36,8 @@ int	main(void)
 	pos_move(pos, 3, 0);
 	pos_print(pos);
 	//Config
-	width = 640;
-	height = 640;
+	width = 987;
+	height = 610;
 
 	ft_printf("Creating MLX context.\n");
 	ctx = mlx_init();

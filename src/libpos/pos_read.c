@@ -1,7 +1,7 @@
 #include"libpos.h"
 #include"libmap.h"
 
-char	pos_read(void *self)
+char	pos_read(void *self, void *map)
 {
-	return (map_read_at(pos_map(self), pos_x(self), pos_y(self)));
+	return (map_read_at(map, pos_x(self), pos_y(self)));
 }

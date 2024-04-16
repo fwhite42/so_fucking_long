@@ -11,16 +11,26 @@ define SETTERS
 	set_maxsize:int
 	set_stepsize:int
 endef
+
 define METHODS
-	increase_max_size
+	create_null
 	create
+	create_default
+	copy
 	destroy
+	increase_max_size
+	skim
 	print
-	push
-	pop
+	printf
 	read_at
+	pop
 	write_at
+	push
 	foreach
+	reduce
+	morph
+	copy_data
+	strchr
 endef
 
 include ../Makefile

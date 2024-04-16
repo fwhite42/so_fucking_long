@@ -1,32 +1,18 @@
-NAME		:= game
-
-define METHODS
+define GETTERS
+	map:void*
+	mobs:void**
 endef
 
-ARCHIVE		:= lib$(NAME).a
+define SETTERS
+	bind_map:void*
+	bind_mobs:void**
+endef
 
-CC		:= gcc
-CFLAGS		:= -Wall -Werror -Wextra
-CPPFLAGS	:= -I$(includedir) -I$(CURDIR)	
+define METHODS
+	create_null
+	parse_mobs
+	get_mob_pos
+	destroy
+endef
 
-ARFLAGS		:= -rcs
-
-.PHONY: all
-all: $(ARCHIVE)
-
-.PHONY: re
-re: $(METHODS:%=$(NAME)_%.c) $(ARCHIVE)($(METHODS:%=$(NAME)_%.o))
-
-$(NAME): $(ARCHIVE)
-
-$(ARCHIVE):
-	$(MAKE) re
-
-.PHONY: clean
-clean:
-	$(RM) *.o
-
-.PHONY: fclean
-
-fclean: clean
-	$(RM) *.a
+include ../Makefile
